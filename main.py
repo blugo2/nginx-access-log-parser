@@ -1,6 +1,8 @@
 __author__ = "Richard O'Dwyer"
 __email__ = "richard@richard.do"
 __license__ = "None"
+#--------------------
+__edited_by__ = 'B lugo'
 
 import re
 from operator import itemgetter
@@ -9,7 +11,35 @@ def process_log(log):
     requests = get_requests(log)
     files = get_files(requests)
     totals = file_occur(files)
-    return totals
+    list_1 = []
+    un = []
+    print(files,"here i am")
+    for i in requests:
+        if i[3] == '200':
+            ni2 = [i[0], i[3]]
+            un.append(ni2)
+        #print(i)
+        print(i[0])
+        ni = i[0]
+        list_1.append(ni)
+    print(un,'YOOOOOOOOO')
+    res2 = [] 
+    for i in un:
+        print(i)
+        if i[0] not in res2:
+            ni3 = [i[0], i[1]]
+            res2.append(ni3)
+    print('GOOOOOO',res2,"GOTCHAAAAAA")
+    res = [] 
+    for i in list_1: 
+        if i not in res: 
+            res.append(i)
+    x = len(list_1)
+    x1 = len(res)
+    print("count list1",x)
+    print("count after",x1)
+    print(res)
+    return list_1
 
 def get_requests(f):
     log_line = f.read()
@@ -50,10 +80,13 @@ def file_occur(files):
 if __name__ == '__main__':
 
     #nginx access log, standard format
-    log_file = open('example.log', 'r')
+    log_file = open('access.log', 'r')
+    ####print(log_file.readline(),'WOOOOOOOOOOOOOOOOOOOOo')
 
     # return dict of files and total requests
     urls_with_counts = process_log(log_file)
+    #not doing this one print(urls_with_counts, 'url')
     # sort them by total requests descending
-    sorted_by_count = sorted(urls_with_counts.items(), key=itemgetter(1), reverse=True)
-    print(sorted_by_count)
+    #not doing this onesorted_by_count = sorted(urls_with_counts.items(), key=itemgetter(1), reverse=True)
+    # this on eeither print(sorted_by_count)
+    ####print(find('\x04\x01\x00P\xC6\xCE\x0Eu0\x00',''))
